@@ -32,13 +32,13 @@ module.exports = () => {
         icons: [
           {
             src: path.resolve('src/images/icon.png'),
-            sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
+            sizes: [96, 128, 192, 256, 384, 512],
             destination: path.join('assets', 'icons')
           }
           ],
       }),
       new InjectManifest({
-        swSrc: './src/src-sw.js', // path to your custom service worker
+        swSrc: './src/src-sw.js',
         swDest: 'service-worker.js',
       }),
       ],
