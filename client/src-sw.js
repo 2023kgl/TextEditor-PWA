@@ -22,9 +22,24 @@ const pageCache = new CacheFirst({
 warmStrategyCache({
   urls: ['/index.html', '/'],
   strategy: pageCache,
-});
+}); 
 
 registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
 // TODO: Implement asset caching
-registerRoute();
+
+registerRoute(
+  ({ request }) => ['style', 'script', 'image'].includes(request.destination),
+  new StaleWhileRevalidate({
+    cacheName: 'asset-cache',
+    plugins: [
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+      new ExpirationPlugin({
+        maxAgeSeconds: 30 * 24 * 60 * 60,
+        maxEntries: 60, 
+      }),
+    ],
+  })
+);
