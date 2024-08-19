@@ -14,8 +14,6 @@ module.exports = () => {
     entry: {
       main: './src/js/index.js',
       install: './src/js/install.js',
-      // clean: true,
-      // assetModuleFilename: '[name][text]'
     },
 
     output: {
@@ -32,12 +30,15 @@ module.exports = () => {
       }),
 
       new WebpackPwaManifest({
-        name: 'TextEditor-PWA',
-        short_name: 'Jate',
+        name: 'Just Another Text Editor',
+        short_name: 'JATE',
         description: 'Progressive Web App',
-        background_color: '#ffffff',
-        theme_color: '#ffffff',
+        background_color: '#225ca3',
+        theme_color: '#225ca3',
         start_url: './',
+        publicPath: '/',
+        fingerprints: false,
+        inject: true,
         icons: [
           {
             src: path.resolve(__dirname, 'src/images/logo.png'),
@@ -58,17 +59,21 @@ module.exports = () => {
       rules: [
 
         {
-          test: /\.css$/,
+          test: /\.css$/i,
           use: ['style-loader', 'css-loader'],
         },
 
         {
-          test: /\.js$/,
+          test: /\.m?js$/,
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
+              plugins: [
+                "@babel/plugin-proposal-object-rest-spread",
+                "@babel/transform-runtime",
+              ]
             },
           },
         },
