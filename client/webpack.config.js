@@ -13,7 +13,9 @@ module.exports = () => {
 
     entry: {
       main: './src/js/index.js',
-      install: './src/js/install.js'
+      install: './src/js/install.js',
+      // clean: true,
+      // assetModuleFilename: '[name][text]'
     },
 
     output: {
@@ -31,7 +33,7 @@ module.exports = () => {
 
       new WebpackPwaManifest({
         name: 'TextEditor-PWA',
-        short_name: 'Tate',
+        short_name: 'Jate',
         description: 'Progressive Web App',
         background_color: '#ffffff',
         theme_color: '#ffffff',
@@ -46,7 +48,7 @@ module.exports = () => {
       }),
 
       new InjectManifest({
-        swSrc: path.resolve(__dirname,'./src-sw.js'),
+        swSrc: './src-sw.js',
         swDest: 'src-sw.js',
       }),
       ],
@@ -72,13 +74,14 @@ module.exports = () => {
         },
       ],
 
-      // resolve: {
-      //   extensions: ['.js', '.json'],
-      //   alias: {
-      //     src: path.resolve(__dirname, 'src')
-      //   }
-      // }
-
+      
     },
+    resolve: {
+      extensions: ['.js', '.json'],
+      alias: {
+        src: path.resolve(__dirname, 'src')
+      }
+    }
+    
   };
 };
