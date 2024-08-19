@@ -26,7 +26,6 @@ module.exports = () => {
       new HtmlWebpackPlugin({
         template: './index.html',
         title: 'TextEditor-PWA',
-        filename: 'index.html'
       }),
 
       new WebpackPwaManifest({
@@ -80,13 +79,6 @@ module.exports = () => {
       ],
 
       
-    },
-    resolve: {
-      extensions: ['.js', '.json'],
-      alias: {
-        src: path.resolve(__dirname, 'src')
-      }
-    }
-    
+    },   
   };
 };

@@ -20,8 +20,8 @@ try {
   const db = await openDB('jate', 1)
   const tx = db.transaction('jate', 'readwrite')
   const store = tx.objectStore('jate')
-  const request = store.put({ content })
-
+  const request = store.put({ id: 1, value: content })
+  
   const result = await request
   console.log('data saved to the database', result)
 
@@ -38,17 +38,18 @@ export const getDb = async () => {
 
   try {
 
-    const db = await openDB('jate', 1);
-    const tx = db.transaction('jate', 'readonly');
-    const store = tx.objectStore('jate');
-    const request = store.getAll();
+    const db = await openDB('jate', 1)
+    const tx = db.transaction('jate', 'readonly')
+    const store = tx.objectStore('jate')
+    const request = store.get(1)
 
     const result = await request;
-    console.log('data retrieved from the database', result);
-    return result;
+    console.log('data retrieved from the database', result)
+    // return result;
+    return result?.value
 
   } catch (error) {
-  console.error('getDb not implemented');
+  console.error('getDb not implemented')
 
   }
 }
